@@ -1,5 +1,23 @@
 function playGame() {
-	var startingBet = parseInt(document.forms["gameForm"]["input"].value, 10);
+
+	var inputValue = document.forms["gameForm"]["input"].value;
+
+	var startingBet = parseInt(inputValue, 10);
+	
+    // Check input value
+
+    if (inputValue == "")
+    {
+		document.getElementById("validationMessageIndex").innerText = "Please enter your bet.";
+
+		return null;
+    }
+    else if (startingBet < 1)
+    {
+		document.getElementById("validationMessageIndex").innerText = "Please enter a number greater than 0.";
+
+		return null;
+    }
 
 	var moneyRemaining = startingBet;
 	var totalRolls = 0;
@@ -44,8 +62,23 @@ function rollDice() {
 	return dice1 + dice2;
 }
 
-/*
-function output() {
-	   document.getElementById("numberLabel").innerText = "test";
-}
-*/
+// Bootstrap Validation
+(function() {
+  'use strict';
+  window.addEventListener('load', function() {
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.getElementsByClassName('needs-validation');
+
+    // Loop over them and prevent submission
+    var validation = Array.prototype.filter.call(forms, function(form) {
+      form.addEventListener('submit', function(event) {
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  }, false);
+})();
+
