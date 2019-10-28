@@ -1,17 +1,16 @@
 function playGame() {
 	var startingBet = parseInt(document.forms["gameForm"]["input"].value, 10);
 
-	var result = rollDice();
-
 	var moneyRemaining = startingBet;
 	var totalRolls = 0;
 	var highestAmountWon = startingBet;
 	var highestAmountRollCount = 1;
 
-	console.log("result is: " + result)
-
-	if (moneyRemaining > 0)
+	while (moneyRemaining > 0)
 	{
+		var result = rollDice();
+		totalRolls = totalRolls + 1;
+
 		if (result == 7)
 		{
 			moneyRemaining = moneyRemaining + 4;
@@ -20,9 +19,19 @@ function playGame() {
 		{
 			moneyRemaining = moneyRemaining - 1;
 		}
+
+		if (highestAmountWon < moneyRemaining)
+		{
+			highestAmountWon = moneyRemaining;
+			highestAmountRollCount = totalRolls;
+		}
+
 	}
 
-	console.log("money remaining: " + moneyRemaining);
+	document.getElementById("startingBetIndex").innerText = startingBet;
+	document.getElementById("totalRollsIndex").innerText = totalRolls;
+	document.getElementById("highestAmountWonIndex").innerText = highestAmountWon;
+	document.getElementById("rollCountAtHighestIndex").innerText = highestAmountRollCount;
 
 	return moneyRemaining;
 
