@@ -51,7 +51,8 @@ Most recent revision: 10-27-2019
 			<form name="gameForm"  onsubmit="return false;" class="form-inlin justify-content-center needs-validation" novalidate>
 				<div class="form-group">
 					<label for="input" id="numberLabel">Starting Bet: </label>
-					<input type="number" min="0" class="form-control" id="input" required>
+					<input type="number" min="1" onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+                      title="Numbers only" class="form-control" id="input" required>
 					<div class="invalid-feedback">
 			          	<span id="validationMessageIndex"></span>
 			        </div>
